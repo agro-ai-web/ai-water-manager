@@ -1,332 +1,368 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AI Water Manager — Hackathon Demo</title>
-  <meta name="description" content="AI-based smart drip irrigation for Uzbekistan — prototype demo site for hackathon." />
-  <meta name="author" content="Temur Kadirov et al." />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title data-i18n="meta_title">AgroAI — Smart Drip Irrigation for Uzbekistan</title>
+  <meta name="description"
+    content="AI-driven soil‑moisture forecasting and automated irrigation control for Uzbekistan’s water‑stressed agriculture.">
   <style>
-    /* Simple modern CSS — single file for easy deployment */
-    :root{
-      --bg:#0f1724; --card:#0b1220; --muted:#94a3b8; --accent:#10b981; --glass: rgba(255,255,255,0.04);
-      --maxw:1100px;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    }
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071029 0%, #081428 100%);color:#e6eef6}
-    .wrap{max-width:var(--maxw);margin:36px auto;padding:28px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo svg{width:48px;height:48px}
-    nav a{color:var(--muted);text-decoration:none;margin:0 10px;font-weight:600}
-    nav a:hover{color:var(--accent)}
-    .hero{display:grid;grid-template-columns:1fr 380px;gap:32px;align-items:center;margin-top:28px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:14px;box-shadow:0 6px 22px rgba(4,8,15,0.6);border:1px solid rgba(255,255,255,0.03)}
-    h1{font-size:28px;margin:0 0 8px}
-    p.lead{color:var(--muted);margin:0 0 16px}
-    .cta{display:flex;gap:12px;margin-top:12px}
-    .btn{background:var(--accent);color:#04201a;padding:10px 14px;border-radius:10px;font-weight:700;border:none;cursor:pointer}
-    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-    .stats{display:flex;gap:14px;margin-top:18px}
-    .stat{background:var(--glass);padding:14px;border-radius:10px;text-align:center}
-    .stat b{display:block;font-size:18px}
-
-    /* Sections */
-    section{margin-top:28px}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .timeline{display:flex;flex-direction:column;gap:12px}
-    .tl-item{display:flex;gap:14px;align-items:flex-start}
-    .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);margin-top:6px}
-    .small{font-size:14px;color:var(--muted)}
-    ul.clean{padding-left:16px;margin:8px 0}
-
-    /* Team */
-    .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .member{padding:14px;border-radius:10px;background:rgba(255,255,255,0.02)}
-    .role{color:var(--muted);font-size:13px}
-
-    /* Roadmap */
-    .roadmap{display:flex;flex-wrap:wrap;gap:12px}
-    .phase{flex:1 1 220px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-
-    footer{margin-top:36px;padding:14px;text-align:center;color:var(--muted);font-size:14px}
-
-    /* Responsive */
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr;}
-      .team-grid{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width:560px){
-      .team-grid{grid-template-columns:1fr}
-      nav{display:none}
+    :root {
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #94a3b8;
+      --accent: #10b981;
+      --glass: rgba(255, 255, 255, 0.04);
+      --maxw: 1100px;
+      font-family: Inter, ui-sans-serif;
     }
 
-    /* small utility */
-    .kbd{display:inline-block;padding:6px 8px;border-radius:6px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);font-weight:700}
-  
-    /* Video background */
-    #bg-video{
-      position:fixed;
-      top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: linear-gradient(180deg, #071029 0%, #081428 100%);
+      color: #e6eef6
     }
-    .video-overlay{
-      position:fixed;top:0;left:0;width:100%;height:100%;
-      background:rgba(0,0,0,0.45);z-index:-1;
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 36px auto;
+      padding: 28px
     }
-    /* Carousel */
-    .carousel{display:flex;overflow-x:auto;gap:12px;padding:10px}
-    .carousel img{height:160px;border-radius:10px;flex-shrink:0}
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      padding: 22px;
+      border-radius: 14px;
+      box-shadow: 0 6px 22px rgba(4, 8, 15, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.03)
+    }
+
+    h1 {
+      font-size: 30px;
+      margin: 0 0 8px;
+      font-weight: 800
+    }
+
+    h2 {
+      font-size: 24px;
+      margin: 0 0 10px;
+      font-weight: 700
+    }
+
+    h3 {
+      margin: 6px 0;
+      font-weight: 700
+    }
+
+    p.lead {
+      color: var(--muted);
+      margin: 0 0 16px;
+      font-size: 15px;
+      line-height: 1.55
+    }
+
+    .small {
+      font-size: 14px;
+      color: var(--muted)
+    }
+
+    ul.clean {
+      padding-left: 16px;
+      margin: 8px 0
+    }
+
+    .btn {
+      background: var(--accent);
+      color: #04201a;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer
+    }
+
+    .btn.secondary {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--muted)
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px
+    }
+
+    @media(max-width:900px) {
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    @media(max-width:560px) {
+      .team-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    footer {
+      margin-top: 36px;
+      padding: 14px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px
+    }
   </style>
 </head>
+
 <body>
-  <!-- Video Background -->
-  <video autoplay muted loop playsinline id="bg-video">
-    <source src="media/irrigation.mp4" type="video/mp4">
-  </video>
-  <div class="video-overlay"></div>
   <div class="wrap">
-    <header>
-      <div class="logo">
-        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+
+    <header style="display:flex;align-items:center;justify-content:space-between;gap:16px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <svg viewBox="0 0 48 48" width="48" height="48">
           <rect width="48" height="48" rx="10" fill="#042f2b" />
-          <path d="M12 30c4-6 10-10 18-12" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-          <circle cx="36" cy="12" r="5" fill="#64f3c9" opacity="0.9"/>
+          <path d="M12 30c4-6 10-10 18-12" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" fill="none" />
+          <circle cx="36" cy="12" r="5" fill="#64f3c9" opacity="0.9" />
         </svg>
         <div>
-          <div style="font-weight:800">AI Water Manager</div>
-          <div style="font-size:12px;color:var(--muted)">Smart drip irrigation — Uzbekistan pilot</div>
+          <div style="font-weight:800;font-size:18px">AgroAI</div>
+          <div class="small" data-i18n="header_sub">AI‑powered precision drip irrigation</div>
         </div>
       </div>
-      <nav>
-        <a href="#problem">Problem</a>
-        <a href="#team">Team</a>
-        <a href="#why">Why Us</a>
-        <a href="#roadmap">Roadmap</a>
-        <a href="#plan">Plan</a>
+      <nav style="font-weight:600">
+        <a href="#problem" class="small" data-i18n="nav_problem">Problem</a>
+        <a href="#solution" class="small" data-i18n="nav_solution">Solution</a>
+        <a href="#team" class="small" data-i18n="nav_team">Team</a>
+        <a href="#why" class="small" data-i18n="nav_why">Why Us</a>
+        <a href="#roadmap" class="small" data-i18n="nav_roadmap">Roadmap</a>
+        <a href="#plan" class="small" data-i18n="nav_plan">Implementation</a>
       </nav>
+      <div id="lang-switch" style="display:flex;gap:6px;font-size:13px">
+        <button class="btn secondary" onclick="setLang('en')">EN</button>
+        <button class="btn secondary" onclick="setLang('uz')">UZ</button>
+        <button class="btn secondary" onclick="setLang('ru')">RU</button>
+      </div>
     </header>
 
-    <main>
-      <section class="hero">
+    <!--------------------------- HERO ------------------------------->
+    <section class="card" style="margin-top:28px;text-align:center;padding:50px 20px">
+      <div>
+        <h1 data-i18n="hero_title">AI‑Driven Smart Drip Irrigation for Uzbekistan</h1>
+        <p class="lead" data-i18n="hero_text">A field‑ready system combining soil sensors, LPWAN connectivity and AI
+          moisture forecasting to reduce agricultural water consumption while maintaining yield stability.</p>
+
+        <div style="display:flex;gap:14px;margin-top:14px">
+          <button class="btn" data-i18n="hero_btn_solution"
+            onclick="document.querySelector('#solution').scrollIntoView({behavior:'smooth'})">Explore Solution</button>
+          <button class="btn secondary" data-i18n="hero_btn_roadmap"
+            onclick="document.querySelector('#roadmap').scrollIntoView({behavior:'smooth'})">Roadmap</button>
+        </div>
+      </div>
+
+
+    </section>
+
+    <!-- FULL CONTENT START -->
+
+    <section id="hero" class="card" style="margin-top:40px;padding:40px;text-align:center">
+      <h2>🌊 Smart Irrigation for Uzbekistan's Future</h2>
+      <p class="small">Transforming Agriculture Through AI</p>
+      <p class="small">Our intelligent irrigation system combines sensor networks, machine learning, and drip technology
+        to save up to 50% of water while maintaining crop yields in Uzbekistan's agricultural sector.</p>
+    </section>
+
+    <section id="problem" class="card" style="margin-top:32px">
+      <h2>🎯 Problem & Solution</h2>
+      <h3>The Challenge</h3>
+      <p>Uzbekistan faces a <b>critical water crisis</b> in agriculture:</p>
+      <ul class="small clean">
+        <li><b>92% of national water</b> goes to agricultural irrigation</li>
+        <li>Outdated irrigation systems cause massive water loss through leakage and evaporation</li>
+        <li>Cotton and wheat farming consume enormous water resources</li>
+        <li>Chronic water stress threatens food security and economic stability</li>
+      </ul>
+    </section>
+
+    <section id="solution" class="card" style="margin-top:32px">
+      <h3>Our Solution</h3>
+      <p>We've developed an <b>AI-powered smart irrigation system</b> that:</p>
+      <ul class="small clean">
+        <li><b>Reduces water usage by 30–50%</b> through precision delivery</li>
+        <li>Uses real-time soil moisture, temperature, and weather data</li>
+        <li>Employs machine learning to predict irrigation needs 24–72 hours ahead</li>
+        <li>Delivers water directly to plant roots via advanced drip technology</li>
+        <li>Provides farmers with automated scheduling and real-time monitoring</li>
+      </ul>
+    </section>
+
+    <!--------------------------- TEAM ------------------------------->
+    <section id="team" style="margin-top:38px">
+      <h2 class="card" style="padding:14px;border-radius:12px;margin-bottom:12px">👥 Meet Our Team</h2>
+      <p class="small">We are AgroAI — a multidisciplinary team dedicated to solving Uzbekistan’s water crisis.</p>
+      <div class="team-grid">
         <div class="card">
-          <h1>AI-driven smart drip irrigation for Uzbekistan</h1>
-          <p class="lead">Reduce water use, keep yields stable — a field-scale system combining IoT sensors, LPWAN gateways, solenoid valves and ML forecasting to irrigate only when crops need it.</p>
-          <div class="cta">
-            <button class="btn" onclick="downloadHTML()">Download HTML</button>
-            <button class="btn secondary" onclick="scrollTo('#roadmap')">See Roadmap</button>
-          </div>
-
-          <div class="stats">
-            <div class="stat"><span class="small">Estimated savings</span><b>20–50%</b></div>
-            <div class="stat"><span class="small">Pilot cost</span><b>$2,500–3,500 / ha</b></div>
-            <div class="stat"><span class="small">Prediction window</span><b>24–72 h</b></div>
-          </div>
-
-          <hr style="border:none;height:1px;background:rgba(255,255,255,0.02);margin:16px 0">
-          <p class="small">Built by a 5-person team combining hardware, AI, cloud, agronomy and field testing expertise.</p>
+          <h3>Temur Kadirov</h3>
+          <p class="small">Team Lead • AI Engineer • Web Developer</p>
         </div>
+        <div class="card">
+          <h3>Shamirzayev Usmon</h3>
+          <p class="small">Hardware • Sensor Integration</p>
+        </div>
+        <div class="card">
+          <h3>Maxmudov Vosiqxoja</h3>
+          <p class="small">Backend • Cloud Developer</p>
+        </div>
+        <div class="card">
+          <h3>Nasrullayev Feruz</h3>
+          <p class="small">Data Analytics • Economics</p>
+        </div>
+      </div>
+    </section>
 
-        <aside>
-          <div class="card">
-            <h3 style="margin-top:4px">Quick demo</h3>
-            <p class="small">Interactive scenario: change soil moisture and see suggested irrigation action.</p>
-            <label class="small">Soil moisture (%)</label>
-            <input id="moslider" type="range" min="0" max="100" value="35" style="width:100%;margin:8px 0" oninput="updateDemo()">
-            <div id="demoout" style="padding:12px;border-radius:8px;background:rgba(0,0,0,0.12);font-weight:700">Suggested action: —</div>
-            <div style="margin-top:10px" class="small">Tip: lower values mean dryer soil; system predicts need using weather + historical data.</div>
-          </div>
-        </aside>
+    <section id="why" class="card" style="margin-top:32px">
+      <h2>💪 Why We Can Solve This</h2>
+      <h3>Local Expertise</h3>
+      <ul class="small clean">
+        <li>Uzbekistan's agricultural conditions and soil types</li>
+        <li>Regional climate challenges across Samarkand, Fergana Valley, Surkhandarya</li>
+        <li>Local farming practices and infrastructure constraints</li>
+      </ul>
+
+      <h3>Technical Excellence</h3>
+      <ul class="small clean">
+        <li><b>AI/ML:</b> LSTM networks, Gradient Boosting Machines</li>
+        <li><b>Engineering:</b> Sensor networks, LPWAN, automated valve control</li>
+        <li><b>Agriculture:</b> Crop requirements, soil characteristics, fertigation</li>
+      </ul>
+
+      <h3>Research‑Backed Approach</h3>
+      <ul class="small clean">
+        <li>International best practices (FAO, World Bank)</li>
+        <li>Local research from TIIAME on soil salinity</li>
+        <li>Proven drip irrigation success</li>
+      </ul>
+
+      <h3>Practical Focus</h3>
+      <ul class="small clean">
+        <li><b>Cost-effective:</b> $2,500–$3,500 per hectare</li>
+        <li><b>Payback:</b> 3–5 years</li>
+        <li><b>Scalable:</b> from small farms to industrial agro‑clusters</li>
+        <li><b>Minimal adaptation</b> to existing systems</li>
+      </ul>
+    </section>
+
+    <section id="roadmap" class="card" style="margin-top:32px">
+      <h2>🗺️ Roadmap & Current Stage</h2>
+      <h3>Current Stage: <b>Pilot Development</b> 🔵</h3>
+
+      <h3>Phase 1: Planning & Design — ✅ COMPLETE</h3>
+      <ul class="small clean">
+        <li>System architecture</li>
+        <li>Sensor layout design</li>
+        <li>ML model framework selection</li>
+        <li>Cost-benefit analysis</li>
+        <li>Stakeholder research</li>
+      </ul>
+
+      <h3>Phase 2: Pilot Implementation — 🔵 CURRENT</h3>
+      <ul class="small clean">
+        <li>Verify costs with suppliers</li>
+        <li>Install 1‑hectare pilot</li>
+        <li>Deploy sensors (8–12 per hectare)</li>
+        <li>Set up drip lines</li>
+        <li>Install automated valve control</li>
+        <li>Deploy LPWAN gateway</li>
+      </ul>
+
+      <h3>Phase 3–5 Upcoming</h3>
+      <ul class="small clean">
+        <li>Data collection</li>
+        <li>ML model refinement</li>
+        <li>Scaling strategy</li>
+      </ul>
+    </section>
+
+    <section id="plan" class="card" style="margin-top:32px">
+      <h2>🔧 How We Plan to Solve It</h2>
+      <h3>System Architecture</h3>
+      <ul class="small clean">
+        <li><b>Field Sensors:</b> Soil moisture at 10–30cm & 40–60cm, thermistors, flow meters</li>
+        <li><b>Smart Control:</b> LPWAN, gateway, cloud/edge AI, LSTM & GBM algorithms</li>
+        <li><b>Precision Irrigation:</b> Drip lines, solenoid valves, zone automation</li>
+      </ul>
+
+      <h3>Machine Learning Intelligence</h3>
+      <ul class="small clean">
+        <li>Moisture forecasting 24–72 hours ahead</li>
+        <li>Weather + satellite integration</li>
+        <li>Closed‑loop feedback</li>
+        <li>RMSE validation</li>
+      </ul>
+
+      <h3>Economic Benefits</h3>
+      <ul class="small clean">
+        <li>30–50% water reduction</li>
+        <li>Lower fuel & labor costs</li>
+        <li>Payback in 3–5 years</li>
+      </ul>
+    </section>
+
+    <section id="impact" class="card" style="margin-top:32px">
+      <h2>📊 Expected Impact</h2>
+      <h3>🌱 Environmental Impact</h3>
+      <ul class="small clean">
+        <li>Save millions of cubic meters of water annually</li>
+        <li>Reduce agricultural water stress (currently 131.93 on SDG indicator)</li>
+        <li>Prevent soil degradation and salinization</li>
+        <li>Support sustainable farming</li>
+      </ul>
+
+      <h3>💰 Economic Impact</h3>
+      <ul class="small clean">
+        <li>Lower operational farm costs</li>
+        <li>Higher crop yields</li>
+        <li>New agri‑tech jobs</li>
+        <li>Support Uzbekistan's digital agriculture transformation</li>
+
+      </ul>
+
+      <h3>🤝 Social Impact</h3>
+      <ul class="small clean">
+        <li>Empower farmers with technology</li>
+        <li>Improve rural livelihoods</li>
+        <li>Boost national water security</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="card" style="margin-top:32px">
+      <h2>📞 Contact & Next Steps</h2>
+      <ul class="small clean">
+        <li><b>Pilot site partners:</b> 1‑ha field test</li>
+        <li><b>Government collaboration:</b> Ministry of Agriculture & Water Resources</li>
+        <li><b>Investment:</b> Scaling beyond pilot</li>
+        <li><b>Research partnerships:</b> Universities & institutes</li>
+      </ul>
+
+      <section class="card" style="margin-top:32px;text-align:center">
+        <h2>🚀 Join us in revolutionizing agriculture in Uzbekistan.</h2>
+        <p class="small">Together, we can turn water scarcity into water security.</p>
       </section>
 
-      <!-- Problem -> Solution -->
-      <section id="problem" class="card">
-        <h2>Problem → Solution</h2>
-        <div class="grid-2" style="margin-top:12px">
-          <div>
-            <h3>Problem</h3>
-            <p class="small">Uzbekistan uses nearly <strong>92% of national water for irrigation</strong>. Much of that water is lost in old canals, unmetered furrows, and via inefficient schedules. Soil types and salinity vary across regions, while many farms still use fixed-time irrigation without feedback — leading to wasted water, higher costs, and environmental stress.</p>
-            <ul class="clean small">
-              <li>Large fraction of water used by agriculture</li>
-              <li>Outdated irrigation infrastructure</li>
-              <li>Lack of sensor-based decision-making</li>
-              <li>Heterogeneous soils & maintenance challenges</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Solution</h3>
-            <p class="small">The proposed solution is a smart drip system that uses sensor networks, an ML controller, and zone valves to apply water precisely. By forecasting soil moisture (24–72 hours) and reacting to measured conditions, the system reduces applied water while keeping yields steady.</p>
-            <ul class="clean small">
-              <li>Soil moisture + temperature + flow sensing</li>
-              <li>LPWAN gateways and edge processing</li>
-              <li>ML scheduling (LSTM / GBM / hybrid)</li>
-              <li>Farmer dashboard for monitoring & alerts</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Team -->
-      <section id="team">
-        <h2 class="card" style="padding:14px;border-radius:12px">Team</h2>
-        <div class="team-grid" style="margin-top:12px">
-          <div class="member card">
-            <div style="font-weight:800">Temur Kadirov</div>
-            <div class="role">Team Lead / System Architect</div>
-            <p class="small">IoT design, LPWAN, edge compute. Links: <a href="#">GitHub</a> • <a href="#">LinkedIn</a></p>
-          </div>
-          <div class="member card">
-            <div style="font-weight:800">Omar Karimov</div>
-            <div class="role">AI / ML Engineer</div>
-            <p class="small">LSTM & GBM models, feature engineering, PyTorch. Links: <a href="#">GitHub</a></p>
-          </div>
-          <div class="member card">
-            <div style="font-weight:800">Shamirzayev Usmon</div>
-            <div class="role">Hardware & Sensor Engineer</div>
-            <p class="small">Drip lines, filters, valves, sensor calibration.</p>
-          </div>
-          <div class="member card">
-            <div style="font-weight:800">Maxmudov Vosiqxoja</div>
-            <div class="role">Backend & Cloud Developer</div>
-            <p class="small">APIs, DB, dashboard. Cloud deployments & CI/CD.</p>
-          </div>
-          <div class="member card">
-            <div style="font-weight:800">Nasrullayev Feruz</div>
-            <div class="role">Research & Field Testing</div>
-            <p class="small">Soil & climate adaptation, pilot coordination, UX for farmers.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Why us -->
-      <section id="why" class="card">
-        <h2>Why our team can solve this</h2>
-        <p class="small">We combine cross-disciplinary expertise: field engineering, sensor integration, ML modelling, cloud & dashboard development, and local adaptation research. This lets us move from a prototype to a field-validated MVP quickly and responsibly.</p>
-        <ul class="clean small">
-          <li>Hands-on experience with sensors & LPWAN</li>
-          <li>Proven ML methods for time-series forecasting</li>
-          <li>Field-testing plan adapted to Uzbek soils & climate</li>
-          <li>Clear maintenance & scaling strategy</li>
-        </ul>
-      </section>
-
-      <!-- Roadmap -->
-      <section id="roadmap" class="card">
-        <h2>Roadmap</h2>
-
-        <!-- Carousel visuals -->
-        <div class="carousel" style="margin:12px 0 20px 0">
-          <img src="media/idea.jpg" alt="Idea stage" />
-          <img src="media/prototype.jpg" alt="Prototype" />
-          <img src="media/mvp.jpg" alt="MVP" />
-          <img src="media/launch.jpg" alt="Launch" />
-        </div>
-
-        <div class="roadmap" style="margin-top:12px">
-          <div class="phase">
-            <h4>Idea (Done)</h4>
-            <p class="small">Problem research, literature review, architecture sketch.</p>
-            <div class="small">Deliverables: concept doc, initial cost estimates</div>
-          </div>
-          <div class="phase">
-            <h4>Prototype (Now)</h4>
-            <p class="small">Sensor mockups, gateway, basic dashboard, first ML prototype.</p>
-            <div class="small">Deliverables: data pipeline, basic model, test rig</div>
-          </div>
-          <div class="phase">
-            <h4>MVP (4–6 weeks)</h4>
-            <p class="small">Full sensor grid + valve control, 24–72h predictions, pilot on small plot.</p>
-            <div class="small">Deliverables: working system, pilot report</div>
-          </div>
-          <div class="phase">
-            <h4>Launch</h4>
-            <p class="small">1-hectare pilot, economics validation, partner outreach.</p>
-            <div class="small">Deliverables: scale plan, refinement, partnerships</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Implementation plan -->
-      <section id="plan" class="card">
-        <h2>How we'll implement the solution</h2>
-        <div class="grid-2" style="margin-top:12px">
-          <div>
-            <h3>Hardware & Field</h3>
-            <ul class="clean small">
-              <li>Soil moisture sensors (capacitive) at 10–30 cm & 40–60 cm</li>
-              <li>Flow meters on main supply and solenoid valves per zone</li>
-              <li>Pressure-compensated emitters, filters and flush valves</li>
-              <li>LPWAN (LoRa) gateway with wired fallback</li>
-            </ul>
-            <p class="small">Sensor density: ~8–12 moisture sensors + 1 flow meter per hectare (adjustable by crop & layout)</p>
-          </div>
-          <div>
-            <h3>Software & AI</h3>
-            <ul class="clean small">
-              <li>Backend: FastAPI + PostgreSQL</li>
-              <li>Dashboard: React/Next.js with real-time updates</li>
-              <li>Models: LSTM & GBM ensembles predicting 24–72h moisture</li>
-              <li>Metrics: RMSE for forecast accuracy; % water saved vs baseline</li>
-              <li>Tools: PyTorch, scikit-learn, Docker, GitHub Actions</li>
-            </ul>
-          </div>
-        </div>
-
-        <h4 style="margin-top:12px">Development stages</h4>
-        <ol class="small">
-          <li>Collect sensor & weather data (2–4 weeks)</li>
-          <li>Build data pipeline and baseline models (2 weeks)</li>
-          <li>Prototype valve control & dashboard (2–3 weeks)</li>
-          <li>Field pilot & iterative tuning (1 crop season)</li>
-        </ol>
-
-        <h4 style="margin-top:12px">Maintenance & operations</h4>
-        <p class="small">Weekly filter cleaning, quarterly sensor calibration, automated alerts for pressure/flow anomalies. Local maintenance team + simple logs will keep the system reliable.</p>
-      </section>
-
-      <section class="card">
-        <h2>Contact & Next steps</h2>
-        <p class="small">Want the HTML file, deploy instructions, or a pitch deck? Use the buttons below.</p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
-          <button class="btn" onclick="downloadHTML()">Download HTML</button>
-          <button class="btn secondary" onclick="alert('Pitch deck generation: coming — tell me your preferred slide count')">Request Pitch Deck</button>
-          <button class="btn secondary" onclick="alert('Deploy tips:\n1) Create GitHub repo\n2) Push this file as index.html\n3) Enable GitHub Pages (main branch)')">Deploy Tips</button>
-        </div>
-      </section>
-
-    </main>
-
-    <footer>
-      © AI Water Manager — Hackathon Demo • Team: Temur, Omar, Usmon, Vosiqxoja, Feruz • Built Nov 2025
-    </footer>
-  </div>
-
-  <script>
-    function scrollTo(sel){document.querySelector(sel).scrollIntoView({behavior:'smooth'})}
-
-    // demo interaction
-    const out = document.getElementById('demoout')
-    function updateDemo(){
-      const v = Number(document.getElementById('moslider').value)
-      let msg = ''
-      if(v < 25) msg = 'Urgent: schedule immediate irrigation for this zone (high deficit)'
-      else if(v < 40) msg = 'Recommended: small irrigation event in next 24h'
-      else if(v < 55) msg = 'Monitor: soil near threshold — wait for forecasted rain'
-      else msg = 'No irrigation needed — maintain current schedule'
-      out.textContent = 'Suggested action: ' + msg
-    }
-    updateDemo()
-
-    // download the current HTML source as a file
-    function downloadHTML(){
-      const html = `<!doctype html>\n` + document.documentElement.outerHTML
-      const blob = new Blob([html], {type: 'text/html'})
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = 'hackathon_demo_website.html'
-      a.click()
-      URL.revokeObjectURL(url)
-    }
-  </script>
+      <footer>
+        © AgroAI • Built Nov 2025
+      </footer>
 </body>
 </html>
