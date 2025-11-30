@@ -7,11 +7,12 @@
   <title data-i18n="meta_title">AgroAI — Smart Drip Irrigation for Uzbekistan</title>
   <meta name="description"
     content="AI-driven soil‑moisture forecasting and automated irrigation control for Uzbekistan’s water‑stressed agriculture.">
-   <!-- Load Inter font globally -->
+  <!-- Load Inter font globally -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
   <style>
     :root {
       --bg: #0f1724;
@@ -129,6 +130,96 @@
       color: var(--muted);
       font-size: 14px
     }
+
+    .hero-carousel {
+      text-align: center;
+      position: relative;
+    }
+
+    .carousel-container {
+      position: relative;
+      max-width: 100%;
+      height: 360px;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+
+    .carousel-slide {
+      display: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .fade {
+      animation: fadeEffect 1s ease-in-out;
+    }
+
+    @keyframes fadeEffect {
+      from {
+        opacity: 0.4;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .carousel-prev,
+    .carousel-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      padding: 8px;
+      cursor: pointer;
+      user-select: none;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 50%;
+    }
+
+    .carousel-prev {
+      left: 16px;
+    }
+
+    .carousel-next {
+      right: 16px;
+    }
+
+    .carousel-dots {
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    .carousel-dot {
+      height: 11px;
+      width: 11px;
+      margin: 0 4px;
+      display: inline-block;
+      background: #9aa0a6;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .carousel-dot.active {
+      background: #10b981;
+    }
+    
+    /* Hide carousel on phones & tablets (anything < 992px) */
+		@media (max-width: 991px) {
+  		.desktop-only {
+    		display: none !important;
+  		}
+		}
   </style>
 </head>
 
@@ -158,27 +249,38 @@
     </header>
 
     <!--------------------------- HERO ------------------------------->
-    <section class="card" style="margin-top:28px;text-align:center;padding:50px 20px">
-      <div>
-        <h1 data-i18n="hero_title">AI‑Driven Smart Drip Irrigation for Uzbekistan</h1>
-        <p class="lead" data-i18n="hero_text">A field‑ready system combining soil sensors, LPWAN connectivity and AI
-          moisture forecasting to reduce agricultural water consumption while maintaining yield stability.</p>
+    <section class="card hero-carousel desktop-only">
+      <div class="carousel-container">
+        <div class="carousel-slide fade">
+          <img src="assets/images/irr1.png" alt="Image 3">
+        </div>
+        <div class="carousel-slide fade">
+          <img src="assets/images/irr2.png" alt="Image 3">
+        </div>
+        <div class="carousel-slide fade">
+         <img src="assets/images/irr.png" alt="Image 3">
+        </div>
 
-        <div style="display:flex;gap:14px;margin-top:14px">
-          <button class="btn" data-i18n="hero_btn_solution"
-            onclick="document.querySelector('#solution').scrollIntoView({behavior:'smooth'})">Explore Solution</button>
-          <button class="btn secondary" data-i18n="hero_btn_roadmap"
-            onclick="document.querySelector('#roadmap').scrollIntoView({behavior:'smooth'})">Roadmap</button>
+        <!-- navigation arrows -->
+        <a class="carousel-prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="carousel-next" onclick="plusSlides(1)">&#10095;</a>
+
+        <!-- dots -->
+        <div class="carousel-dots">
+          <span class="carousel-dot" onclick="currentSlide(1)"></span>
+          <span class="carousel-dot" onclick="currentSlide(2)"></span>
+          <span class="carousel-dot" onclick="currentSlide(3)"></span>
         </div>
       </div>
 
-
+      <h1 style="margin-top:25px;">AI-Driven Smart Drip Irrigation for Uzbekistan</h1>
+      <p class="small">A field-ready system combining soil sensors, LPWAN connectivity and AI forecasting.</p>
     </section>
 
     <!-- FULL CONTENT START -->
 
     <section id="hero" class="card" style="margin-top:40px;padding:40px;text-align:center">
-      <h2>🌊 Smart Irrigation for Uzbekistan's Future</h2>
+      <h2>Smart Irrigation for Uzbekistan's Future</h2>
       <p class="small">Transforming Agriculture Through AI</p>
       <p class="small">Our intelligent irrigation system combines sensor networks, machine learning, and drip technology
         to save up to 50% of water while maintaining crop yields in Uzbekistan's agricultural sector.</p>
@@ -189,7 +291,9 @@
       <h3>The Challenge</h3>
       <p>Uzbekistan faces a <b>critical water crisis</b> in agriculture:</p>
       <ul class="small clean">
-        <li><a href="https://documents1.worldbank.org/curated/en/099062424121035288/pdf/P1700301356bad0519ce81fc808f542aeb.pdf" style="color: #10b981; font-weight: bold;">92% of national water</a> goes to agricultural irrigation</li>
+        <li><a
+            href="https://documents1.worldbank.org/curated/en/099062424121035288/pdf/P1700301356bad0519ce81fc808f542aeb.pdf"
+            style="color: #10b981; font-weight: bold;">92% of national water</a> goes to agricultural irrigation</li>
         <li>Outdated irrigation systems cause massive water loss through leakage and evaporation</li>
         <li>Cotton and wheat farming consume enormous water resources</li>
         <li>Chronic water stress threatens food security and economic stability</li>
@@ -211,12 +315,14 @@
     <!--------------------------- TEAM ------------------------------->
     <section id="team" style="margin-top:38px">
       <h2 class="card" style="padding:14px;border-radius:12px;margin-bottom:12px">👥 Meet Our Team</h2>
-      <p class="small">We are <b style="color: #10b981">AgroAI</b> — a multidisciplinary team dedicated to solving Uzbekistan’s water crisis.</p>
+      <p class="small">We are <b style="color: #10b981">AgroAI</b> — a multidisciplinary team dedicated to solving
+        Uzbekistan’s water crisis.</p>
       <div class="team-grid">
         <div class="card">
           <h3>Temur Kadirov</h3>
           <p class="small">Team Lead • AI Engineer • Web Developer</p>
-          <p class="small"><a href="http://linkedin.com/in/temur-kadirov-b43967310" style="color: #10b981; text-decoration: none;">Links: LinkedIn </a></p>
+          <p class="small"><a href="http://linkedin.com/in/temur-kadirov-b43967310"
+              style="color: #10b981; text-decoration: none;">Links: LinkedIn </a></p>
         </div>
         <div class="card">
           <h3>Shamirzayev Usmon</h3>
@@ -225,7 +331,8 @@
         <div class="card">
           <h3>Maxmudov Vosiqxoja</h3>
           <p class="small">Backend • Devops • AI Engineer</p>
-          <p class="small"><a href="https://github.com/keesouwoudba/cs50-projects" style="color: #10b981; text-decoration: none;">Links: GitHub </a></p>
+          <p class="small"><a href="https://github.com/keesouwoudba/cs50-projects"
+              style="color: #10b981; text-decoration: none;">Links: GitHub </a></p>
         </div>
         <div class="card">
           <h3>Nasrullayev Feruz</h3>
@@ -264,11 +371,14 @@
         <li><b>Scalable:</b> from small farms to industrial agro‑clusters</li>
         <li><b>Minimal adaptation</b> to existing systems</li>
       </ul>
+
+      <p class="small"><a href="https://t.me/agroai_solutions/43" style="color: #10b981; text-decoration: none">* press
+          to access our full project research</a></p>
     </section>
 
     <section id="roadmap" class="card" style="margin-top:32px">
       <h2>🗺️ Roadmap & Current Stage</h2>
-     
+
       <h3>Phase 1: Planning & Design — Current</h3>
       <ul class="small clean">
         <li>System architecture</li>
@@ -319,15 +429,15 @@
         <li>Lower fuel & labor costs</li>
         <li>Payback in 3–5 years</li>
       </ul>
-      
+
       <h3>Maintenance & Sustainability</h2>
-      <ul class="small clean">
-        <li>Weekly filter cleaning (especially in high-salinity areas)</li>
-        <li>Automated alerts for pressure/flow anomalies</li>
-        <li>Quarterly sensor calibration</li>
-        <li>Maintenance log tracking</li>
-      </ul>
-      
+        <ul class="small clean">
+          <li>Weekly filter cleaning (especially in high-salinity areas)</li>
+          <li>Automated alerts for pressure/flow anomalies</li>
+          <li>Quarterly sensor calibration</li>
+          <li>Maintenance log tracking</li>
+        </ul>
+
     </section>
 
     <section id="impact" class="card" style="margin-top:32px">
@@ -367,14 +477,51 @@
         <li><b>Research partnerships:</b> Universities & institutes</li>
       </ul>
 
-      <a href="https://t.me/agroai_solutions/43" style="text-decoration:none; color: #e6eef6">
-      	<section class="card" style="margin-top:32px;text-align:center">
-        	<h2>🚀 Join us in revolutionizing agriculture in Uzbekistan.</h2>
-        	<p class="small">Press to join our Telegram channel</p>
-      	</section>
-			</a>
+      <a href="https://t.me/agroai_solutions" style="text-decoration:none; color: #e6eef6">
+        <section class="card" style="margin-top:32px;text-align:center">
+          <h2>🚀 Join us in revolutionizing agriculture in Uzbekistan.</h2>
+          <p class="small">Press to join our Telegram channel & download the detailed project overview.</p>
+        </section>
+      </a>
       <footer>
         © AgroAI Solutions • Built Nov 2025
       </footer>
 </body>
+
+<script>
+
+  let slideIndex = 1;
+  showSlides(slideIndex);
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+
+  function showSlides(n) {
+    let slides = document.getElementsByClassName("carousel-slide");
+    let dots = document.getElementsByClassName("carousel-dot");
+
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    for (let i = 0; i < dots.length; i++) {
+      dots[i].classList.remove("active");
+    }
+
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].classList.add("active");
+  }
+
+  // Auto-play (optional)
+  setInterval(() => { plusSlides(1); }, 5000);
+</script>
+
+
 </html>
